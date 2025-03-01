@@ -45,14 +45,12 @@ const Chatbot = () => {
         { text: botMessage, isUser: false },
       ]);
     } catch (error) {
-      console.error('Xatolik yuz berdi:', error);
-      // Xatolikni foydalanuvchiga ko'rsatish
+      console.error(error);
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: 'Xatolik yuz berdi. Iltimos, keyinroq urunib ko\'ring.', isUser: false },
       ]);
-    } finally {
-      setInput(''); // Input maydonini tozalash
+      setInput('');
     }
   };
 

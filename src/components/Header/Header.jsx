@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Header.scss";
 import { Link, NavLink } from "react-router-dom";
+import GoogleAuth from "../GoogleAuth/GoogleAuth";
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -13,18 +14,17 @@ const Header = () => {
         <header className="header">
             <div className="container">
                 <div className="logo">
-                    KS
+                    SmartBiz Connect
                 </div>
 
                 <nav className={`nav-links ${menuOpen ? "hidden" : ""}`}>
-                    <NavLink to='/'>О холдинге</NavLink>
-                    <NavLink to='/'>Продукция</NavLink>
-                    <NavLink to='/'>Контакты</NavLink>
+                    <NavLink to='/'>Домой</NavLink>
+                    <NavLink to='/hr'>Панел HR</NavLink>
+                    <NavLink to='/chatbot'>Чат бот</NavLink>
                 </nav>
 
                 <div className={`contact ${menuOpen ? "hidden" : ""}`}>
-                    <span className="search-icon">📞</span>
-                    <Link to='tel:+998333332800' className="phone">33 333 28 00</Link>
+                    <GoogleAuth/>
                 </div>
 
                 <button className={`menu-btn ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
@@ -35,10 +35,10 @@ const Header = () => {
             </div>
 
             <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-                <NavLink to='/' onClick={toggleMenu}>О холдинге</NavLink>
-                <NavLink to='/' onClick={toggleMenu}>Продукция</NavLink>
-                <NavLink to='/' onClick={toggleMenu}>Контакты</NavLink>
-                <Link to='tel:+998333332800' className="phone">33 333 28 00</Link>
+                <NavLink to='/' onClick={toggleMenu}>Домой</NavLink>
+                <NavLink to='/hr' onClick={toggleMenu}>Панел HR</NavLink>
+                <NavLink to='/chatbot' onClick={toggleMenu}>Чат бот</NavLink>
+                <GoogleAuth/>
             </div>
         </header>
     );

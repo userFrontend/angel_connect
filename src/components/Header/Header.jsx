@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import "./Header.scss";
 import { Link, NavLink } from "react-router-dom";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
+import { useInfoContext } from "../../context/infoContext";
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+    const {currentUser} = useInfoContext()
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -20,11 +21,11 @@ const Header = () => {
                 <nav className={`nav-links ${menuOpen ? "hidden" : ""}`}>
                     <NavLink to='/'>Домой</NavLink>
                     <NavLink to='/hr'>Панел HR</NavLink>
-                    <NavLink to='/chatbot'>Чат бот</NavLink>
+                    <NavLink to='/chat'>Чат AI</NavLink>
                 </nav>
 
                 <div className={`contact ${menuOpen ? "hidden" : ""}`}>
-                    <GoogleAuth/>
+                    {currentUser ? `${currentUser.firstname.slice(0, 1) + '.'}${currentUser.lastname.slice(0, 1) }`: <GoogleAuth/>}
                 </div>
 
                 <button className={`menu-btn ${menuOpen ? "open" : ""}`} onClick={toggleMenu}>
@@ -37,8 +38,8 @@ const Header = () => {
             <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
                 <NavLink to='/' onClick={toggleMenu}>Домой</NavLink>
                 <NavLink to='/hr' onClick={toggleMenu}>Панел HR</NavLink>
-                <NavLink to='/chatbot' onClick={toggleMenu}>Чат бот</NavLink>
-                <GoogleAuth/>
+                <NavLink to='/chat' onClick={toggleMenu}>Чат AI</NavLink>
+                {currentUser ? `${currentUser.firstname.slice(0, 1) + '.'}${currentUser.lastname.slice(0, 1) }` : <GoogleAuth/>}
             </div>
         </header>
     );

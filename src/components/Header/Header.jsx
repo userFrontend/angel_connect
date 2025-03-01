@@ -39,7 +39,7 @@ const Header = () => {
                 <NavLink to='/' onClick={toggleMenu}>Домой</NavLink>
                 <NavLink to='/hr' onClick={toggleMenu}>Панел HR</NavLink>
                 <NavLink to='/chat' onClick={toggleMenu}>Чат AI</NavLink>
-                {currentUser ? `${currentUser.firstname.slice(0, 1) + '.'}${currentUser.lastname.slice(0, 1) }` : <GoogleAuth/>}
+                {currentUser ? `${currentUser.firstname}` : <GoogleAuth/>}
             </div>
         </header>
     );

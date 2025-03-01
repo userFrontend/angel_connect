@@ -1,7 +1,21 @@
+/* O'zgaruvchilar */
+:root {
+  --primary-color: #d32f2f;
+  --secondary-color: #ffca28;
+  --text-color: #333;
+  --bg-color: #fff;
+}
+
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: var(--bg-color);
 }
 
 *::-webkit-scrollbar {
@@ -42,7 +56,7 @@ main {
 }
 
 .container {
-  max-width: 1300px;
+  max-width: 1440px;
   padding: 0 20px;
   margin: 0 auto;
 }

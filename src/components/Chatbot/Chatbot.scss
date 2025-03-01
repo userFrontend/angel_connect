@@ -27,6 +27,13 @@
     text-align: left;
     color: #28A745;
     margin-bottom: 0.5rem;
+    white-space: pre-wrap; /* Yangi qatorlarni saqlab qolish */
+  }
+
+  .loading {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
   }
 
   .input-container {
@@ -50,6 +57,11 @@
 
       &:hover {
         background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
       }
     }
   }

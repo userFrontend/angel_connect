@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import './Chatbot.scss';
 
 const Chatbot = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // Yuklash holati
+
+  // Gemini API ni sozlash
+  const genAI = new GoogleGenerativeAI("AIzaSyCGLewOuiQw3bdFLkXk-LDM9P0_mdIKzys"); // API kalitingizni qo'ying
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // Model nomini yangilang
+
+  // Javobni formatlash
+  const formatResponse = (text) => {
+    return text.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
 
   const handleSend = async () => {
     if (!input.trim()) return; // Bo'sh xabar yubormaslik uchun
@@ -15,29 +30,12 @@ const Chatbot = () => {
       { text: input, isUser: true },
     ]);
 
-    // API so'rovini yuborish
-    const options = {
-      method: 'POST',
-      url: 'https://chatgpt-42.p.rapidapi.com/o3mini',
-      headers: {
-        'x-rapidapi-key': 'abd7c23c02msh9eae11004e49a98p1af127jsna81e2115d371', // RapidAPI kalitingiz
-        'x-rapidapi-host': 'chatgpt-42.p.rapidapi.com',
-        'Content-Type': 'application/json',
-      },
-      data: {
-        messages: [
-          {
-            role: 'user',
-            content: input, // Foydalanuvchi xabari
-          },
-        ],
-        web_access: false,
-      },
-    };
+    setIsLoading(true); // Yuklashni boshlash
 
     try {
-      const response = await axios.request(options);
-      const botMessage = response.data.result; // Bot javobi
+      // Gemini API dan javob olish
+      const result = await model.generateContent(input);
+      const botMessage = result.response.text(); // Bot javobi
 
       // Bot javobini chatga qo'shish
       setMessages((prevMessages) => [
@@ -45,12 +43,15 @@ const Chatbot = () => {
         { text: botMessage, isUser: false },
       ]);
     } catch (error) {
-      console.error(error);
+      console.error('Xatolik yuz berdi:', error);
+      // Xatolikni foydalanuvchiga ko'rsatish
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: 'Xatolik yuz berdi. Iltimos, keyinroq urunib ko\'ring.', isUser: false },
       ]);
-      setInput('');
+    } finally {
+      setIsLoading(false); // Yuklashni tugatish
+      setInput(''); // Input maydonini tozalash
     }
   };
 
@@ -62,9 +63,10 @@ const Chatbot = () => {
             key={index}
             className={msg.isUser ? 'user-message' : 'bot-message'}
           >
-            {msg.text}
+            {msg.isUser ? msg.text : formatResponse(msg.text)}
           </div>
         ))}
+        {isLoading && <div className="loading">Yuklanmoqda...</div>} {/* Yuklash animatsiyasi */}
       </div>
       <div className="input-container">
         <input
@@ -73,8 +75,11 @@ const Chatbot = () => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Xabar yozing..."
           onKeyPress={(e) => e.key === 'Enter' && handleSend()} // Enter bosganda xabar yuborish
+          disabled={isLoading} // Yuklash paytida inputni o'chirish
         />
-        <button onClick={handleSend}>Yuborish</button>
+        <button onClick={handleSend} disabled={isLoading}> {/* Yuklash paytida tugmani o'chirish */}
+          {isLoading ? 'Yuklanmoqda...' : 'Yuborish'}
+        </button>
       </div>
     </div>
   );

@@ -12,8 +12,8 @@ function App() {
       <Header  />
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/hr' element={<Chatbot/>}/>
-        <Route path='/chat' element={<HRPanel />}/>
+        <Route path='/hr' element={<HRPanel/>}/>
+        <Route path='/chat' element={<Chatbot />}/>
       </Routes>
     </div>
   );

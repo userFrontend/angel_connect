@@ -1,28 +1,79 @@
 .hr-panel {
-    max-width: 600px;
-    margin: 2rem auto;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+
+  .left-section, .right-section {
+    flex: 1;
+  }
+
+  .file-upload {
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
-  
+
     h2 {
-      text-align: center;
-      color: #6F42C1;
       margin-bottom: 1rem;
     }
-  
-    ul {
-      list-style-type: none;
-      padding: 0;
-  
-      li {
-        padding: 0.5rem;
-        border-bottom: 1px solid #eee;
-  
-        &:last-child {
-          border-bottom: none;
-        }
+
+    input[type="file"] {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    .analysis-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+
+      h3 {
+        margin-bottom: 0.5rem;
       }
     }
   }
+
+  .candidate-info {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .info-section {
+      margin-bottom: 1rem;
+
+      p {
+        margin: 0.5rem 0;
+      }
+    }
+
+    .interview-schedule {
+      padding: 1rem;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+
+      h3 {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@ const HRPanel = () => {
   }, []);
 
   // Gemini API ni sozlash
-  const genAI = new GoogleGenerativeAI("AIzaSyCGLewOuiQw3bdFLkXk-LDM9P0_mdIKzys"); // API kalitingizni qo'ying
+  const genAI = new GoogleGenerativeAI("AIzaSyDGRsj-UV9soehl8W0zl6XK-E0sYr43Yr4"); // API kalitingizni qo'ying
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" }); // Model nomini yangilang
 
   // Faylni drag-and-drop orqali yuklash

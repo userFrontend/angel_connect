@@ -1,79 +1,188 @@
 .hr-panel {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f9f9f9, #e6f4f1);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
 
-  .left-section, .right-section {
-    flex: 1;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.left-section, .right-section {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload {
+  text-align: center;
+  padding: 20px;
+  border: 2px dashed #007bff;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+
+  &.dragging {
+    border-color: #00bfff;
+    background: rgba(0, 123, 255, 0.1);
   }
 
-  .file-upload {
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+  h2 {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
 
-    h2 {
-      margin-bottom: 1rem;
+  .upload-area {
+    p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 20px;
     }
 
-    input[type="file"] {
-      margin-bottom: 1rem;
+    .file-input-label {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #0056b3;
+      }
+    }
+  }
+
+  .file-info {
+    margin-top: 20px;
+    p {
+      font-size: 1rem;
+      color: #333;
     }
 
     button {
-      padding: 0.5rem 1rem;
-      background-color: #007BFF;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s ease;
 
       &:hover {
-        background-color: #0056b3;
+        background: #0056b3;
       }
-    }
 
-    .analysis-result {
-      margin-top: 1rem;
-      padding: 1rem;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-
-      h3 {
-        margin-bottom: 0.5rem;
+      &:disabled {
+        background: #ccc;
+        cursor: not-allowed;
       }
     }
   }
 
-  .candidate-info {
-    padding: 1rem;
-    border: 1px solid #ccc;
+  .user-message {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    animation: fadeInUp 0.5s ease-in-out;
 
-    h2 {
-      margin-bottom: 1rem;
+    h3 {
+      font-size: 1.2rem;
+      color: #007bff;
+      margin-bottom: 10px;
     }
 
-    .info-section {
-      margin-bottom: 1rem;
-
-      p {
-        margin: 0.5rem 0;
-      }
+    p {
+      font-size: 1rem;
+      color: #333;
     }
+  }
+}
 
-    .interview-schedule {
-      padding: 1rem;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+.right-section {
+  h2 {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+
+  .candidates-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+
+    .candidate-card {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.5s ease-in-out;
 
       h3 {
-        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 8px;
+      }
+
+      &.empty {
+        text-align: center;
+        color: #666;
       }
     }
+  }
+}
+
+/* Animatsiyalar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .file-upload {
+    padding: 10px;
+  }
+
+  .file-input-label {
+    padding: 8px 16px;
+  }
+
+  .file-info button {
+    padding: 8px 16px;
+  }
+
+  .candidates-list {
+    grid-template-columns: 1fr;
   }
 }

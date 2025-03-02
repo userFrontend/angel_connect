@@ -14,9 +14,9 @@ const Header = () => {
     return (
         <header className="header">
             <div className="container">
-                <div className="logo">
+                <Link to='/' className="logo">
                     SmartBiz Connect
-                </div>
+                </Link>
 
                 <nav className={`nav-links ${menuOpen ? "hidden" : ""}`}>
                     <NavLink to='/'>Домой</NavLink>
